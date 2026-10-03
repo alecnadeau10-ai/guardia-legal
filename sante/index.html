@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Santé de Guardia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1B122C;
+    --surface: #2B1D41;
+    --surface-2: #34254D;
+    --border: #3F2F5A;
+    --text: #FFFFFF;
+    --muted: #A294BC;
+    --accent: #4DEFA6;
+    --on-accent: #06231A;
+    --ok: #4DEFA6;
+    --warn: #FFC857;
+    --down: #FF6B6B;
+    --font-display: "Sora", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 15px; line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  header.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  h1 { font-family: var(--font-display); font-size: 22px; margin: 0; white-space: nowrap; }
+  h2 { font-family: var(--font-display); font-size: 16px; margin: 28px 0 10px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+  button, .btn {
+    font: 600 14px var(--font-body); border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); padding: 10px 14px; cursor: pointer;
+  }
+  button.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  button:disabled { opacity: .6; cursor: default; }
+  input {
+    width: 100%; font: 16px var(--font-body); color: var(--text); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 6px 0 14px;
+  }
+  input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+  .hidden { display: none !important; }
+  .error { color: var(--down); margin-top: 8px; }
+
+  .verdict { display: flex; gap: 14px; align-items: center; border-radius: 14px; padding: 18px; border: 1px solid; }
+  .verdict .dot { width: 18px; height: 18px; flex: none; }
+  .verdict strong { font-family: var(--font-display); font-size: 20px; display: block; }
+  .verdict.ok { border-color: var(--ok); background: rgba(77,239,166,.08); }
+  .verdict.warn { border-color: var(--warn); background: rgba(255,200,87,.08); }
+  .verdict.down { border-color: var(--down); background: rgba(255,107,107,.10); }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; margin-top: 5px; }
+  .dot.ok { background: var(--ok); }
+  .dot.warn { background: var(--warn); }
+  .dot.down { background: var(--down); }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+  .tile b { font-family: var(--font-display); font-size: 22px; display: block; }
+
+  .group { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .group + .group { margin-top: 12px; }
+  .group > summary {
+    list-style: none; cursor: pointer; padding: 14px 16px; display: flex; gap: 10px; align-items: center;
+    font-weight: 600;
+  }
+  .group > summary::-webkit-details-marker { display: none; }
+  .group > summary .count { margin-left: auto; font-weight: 500; }
+  .row { display: flex; gap: 10px; padding: 10px 16px; border-top: 1px solid var(--border); }
+  .row .label { font-weight: 500; }
+  .row .ms { margin-left: auto; white-space: nowrap; padding-left: 8px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  footer { margin-top: 32px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1>Santé de Guardia</h1>
+    <div class="actions">
+      <button id="refresh" class="hidden" type="button">Actualiser</button>
+      <button id="signout" class="hidden" type="button">Se déconnecter</button>
+    </div>
+  </header>
+
+  <!-- Connexion : code à usage unique envoyé par courriel -->
+  <section id="login" class="card hidden" aria-labelledby="login-title">
+    <h2 id="login-title" style="margin-top:0">Accès réservé</h2>
+    <form id="email-form">
+      <label for="email" class="muted small">Adresse courriel de ton compte Guardia</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <button class="primary" type="submit">Recevoir un code</button>
+    </form>
+    <form id="code-form" class="hidden">
+      <p class="muted small" id="code-sent"></p>
+      <label for="code" class="muted small">Code reçu par courriel</label>
+      <input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" required>
+      <div class="actions">
+        <button class="primary" type="submit">Se connecter</button>
+        <button id="back" type="button">Changer d'adresse</button>
+      </div>
+    </form>
+    <p id="login-error" class="error" role="alert"></p>
+  </section>
+
+  <!-- Tableau de bord -->
+  <section id="dash" class="hidden" aria-live="polite">
+    <div id="verdict" class="verdict">
+      <span class="dot"></span>
+      <div><strong id="verdict-title"></strong><span id="verdict-sub" class="muted small"></span></div>
+    </div>
+
+    <div id="problems-wrap" class="hidden">
+      <h2>À regarder</h2>
+      <div id="problems" class="group"></div>
+    </div>
+
+    <h2>Activité</h2>
+    <div id="tiles" class="tiles"></div>
+
+    <h2>Détail</h2>
+    <div id="groups"></div>
+
+    <footer class="muted small">
+      Vérifié automatiquement toutes les 5 minutes tant que la page est ouverte.
+      <span id="checked-at"></span>
+    </footer>
+  </section>
+
+  <p id="dash-error" class="error card hidden" role="alert"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Valeurs publiques : ce sont les mêmes que celles embarquées dans l'app.
+  // L'accès aux données est vérifié côté serveur par la fonction `health`,
+  // qui n'accepte que le compte administrateur.
+  const SUPABASE_URL = "https://nvdrfdvbtggolnicufqp.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52ZHJmZHZidGdnb2xuaWN1ZnFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNDkzNzYsImV4cCI6MjA5NTgyNTM3Nn0.eNm-c_04-A2rrlrghNyLVv_7EOP_OO0PXmiaInNCaso";
+  const REFRESH_MS = 5 * 60 * 1000;
+
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const $ = (id) => document.getElementById(id);
+  let timer = null;
+  let pendingEmail = "";
+
+  const VERDICTS = {
+    ok: ["Tout fonctionne", "Aucun bris de service détecté."],
+    warn: ["À surveiller", "Rien n'est en panne, mais un point mérite un coup d'œil."],
+    down: ["Bris de service", "Au moins un élément ne répond pas correctement."],
+  };
+  const ACTIVITY = [
+    ["users_total", "Comptes"],
+    ["signups_7d", "Inscriptions, 7 j"],
+    ["receipts_7d", "Reçus scannés, 7 j"],
+    ["pro_profiles", "Comptes Pro"],
+    ["feedback_7d", "Retours reçus, 7 j"],
+  ];
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  function show(view) {
+    $("login").classList.toggle("hidden", view !== "login");
+    $("dash").classList.toggle("hidden", view !== "dash");
+    $("refresh").classList.toggle("hidden", view !== "dash");
+    $("signout").classList.toggle("hidden", view === "login");
+  }
+
+  function checkRow(c) {
+    const row = el("div", "row");
+    row.append(el("span", "dot " + c.status));
+    const body = el("div");
+    body.append(el("div", "label", c.label), el("div", "muted small", c.detail));
+    row.append(body);
+    if (typeof c.latency_ms === "number") row.append(el("span", "ms muted small", c.latency_ms + " ms"));
+    return row;
+  }
+
+  function render(report) {
+    const [title, sub] = VERDICTS[report.verdict] || VERDICTS.down;
+    $("verdict").className = "verdict " + report.verdict;
+    $("verdict").querySelector(".dot").className = "dot " + report.verdict;
+    $("verdict-title").textContent = title;
+    $("verdict-sub").textContent = sub;
+
+    const problems = report.groups.flatMap((g) => g.checks.filter((c) => c.status !== "ok"));
+    $("problems-wrap").classList.toggle("hidden", problems.length === 0);
+    $("problems").replaceChildren(...problems.map(checkRow));
+
+    const tiles = $("tiles");
+    tiles.replaceChildren();
+    if (report.activity) {
+      for (const [key, label] of ACTIVITY) {
+        const t = el("div", "tile");
+        t.append(el("b", "", String(report.activity[key] ?? "–")), el("span", "muted small", label));
+        tiles.append(t);
+      }
+    }
+
+    const groups = $("groups");
+    groups.replaceChildren();
+    for (const g of report.groups) {
+      const bad = g.checks.filter((c) => c.status !== "ok").length;
+      const worst = g.checks.some((c) => c.status === "down") ? "down" : bad ? "warn" : "ok";
+      const d = el("details", "group");
+      if (bad) d.open = true;
+      const s = el("summary");
+      s.append(el("span", "dot " + worst), el("span", "", g.label),
+        el("span", "count muted small", bad ? bad + " à regarder" : g.checks.length + " sur " + g.checks.length));
+      d.append(s, ...g.checks.map(checkRow));
+      groups.append(d);
+    }
+
+    const when = new Date(report.checked_at);
+    $("checked-at").textContent = "Dernière vérification : " +
+      when.toLocaleString("fr-CA", { dateStyle: "medium", timeStyle: "short" }) + ".";
+  }
+
+  async function load() {
+    $("refresh").disabled = true;
+    $("dash-error").classList.add("hidden");
+    try {
+      const { data, error } = await sb.functions.invoke("health", { method: "POST", body: {} });
+      if (error) {
+        const status = error.context && error.context.status;
+        if (status === 401) {
+          await sb.auth.signOut();
+          show("login");
+          $("login-error").textContent = "Ce compte n'a pas accès au tableau de bord.";
+          return;
+        }
+        throw error;
+      }
+      render(data);
+      show("dash");
+    } catch (e) {
+      $("dash-error").textContent =
+        "Impossible de joindre le serveur de Guardia. C'est peut-être lui qui est en panne. (" + (e.message || e) + ")";
+      $("dash-error").classList.remove("hidden");
+    } finally {
+      $("refresh").disabled = false;
+    }
+  }
+
+  function startAutoRefresh() {
+    clearInterval(timer);
+    timer = setInterval(() => { if (!document.hidden) load(); }, REFRESH_MS);
+  }
+
+  $("email-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("login-error").textContent = "";
+    pendingEmail = $("email").value.trim();
+    const btn = e.submitter; btn.disabled = true;
+    const { error } = await sb.auth.signInWithOtp({ email: pendingEmail, options: { shouldCreateUser: false } });
+    btn.disabled = false;
+    if (error) { $("login-error").textContent = "Envoi impossible : " + error.message; return; }
+    $("code-sent").textContent = "Un code a été envoyé à " + pendingEmail + ".";
+    $("email-form").classList.add("hidden");
+    $("code-form").classList.remove("hidden");
+    $("code").focus();
+  });
+
+  $("code-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("login-error").textContent = "";
+    const btn = e.submitter; btn.disabled = true;
+    const { error } = await sb.auth.verifyOtp({ email: pendingEmail, token: $("code").value.trim(), type: "email" });
+    btn.disabled = false;
+    if (error) { $("login-error").textContent = "Code refusé : " + error.message; return; }
+    $("code").value = "";
+    await load();
+    startAutoRefresh();
+  });
+
+  $("back").addEventListener("click", () => {
+    $("code-form").classList.add("hidden");
+    $("email-form").classList.remove("hidden");
+  });
+  $("refresh").addEventListener("click", load);
+  $("signout").addEventListener("click", async () => {
+    clearInterval(timer);
+    await sb.auth.signOut();
+    $("email-form").classList.remove("hidden");
+    $("code-form").classList.add("hidden");
+    show("login");
+  });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && timer) load(); });
+
+  (async () => {
+    const { data } = await sb.auth.getSession();
+    if (data.session) { await load(); startAutoRefresh(); }
+    else show("login");
+  })();
+</script>
+</body>
+</html>
