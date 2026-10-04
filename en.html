@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guardia — Get back the money you're owed</title>
-  <meta name="description" content="Guardia scans your receipts and tracks returns, warranties and price drops. Get back the money you're owed. Free on iPhone — available on the App Store.">
+  <meta name="description" content="Guardia scans your receipts and tracks your returns and warranties. Get back the money you're owed. Free on iPhone and Android.">
   <meta name="apple-itunes-app" content="app-id=6780266787">
   <link rel="canonical" href="https://guardia.reseau-emergence.ca/en.html">
   <link rel="alternate" hreflang="fr-CA" href="https://guardia.reseau-emergence.ca/">
@@ -15,14 +15,14 @@
   <meta property="og:site_name" content="Guardia">
   <meta property="og:locale" content="en_CA">
   <meta property="og:title" content="Guardia — Get back the money you're owed">
-  <meta property="og:description" content="Your receipts. Your warranties. Your money. Guardia scans your receipts and tracks returns, warranties and price drops — so nothing slips by again.">
+  <meta property="og:description" content="Your receipts. Your warranties. Your money. Guardia scans your receipts and tracks your returns and warranties, so nothing slips by again.">
   <meta property="og:url" content="https://guardia.reseau-emergence.ca/en.html">
   <meta property="og:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image-en.jpg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="500">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Guardia — Get back the money you're owed">
-  <meta name="twitter:description" content="Your receipts. Your warranties. Your money. Free on iPhone.">
+  <meta name="twitter:description" content="Your receipts. Your warranties. Your money. Free on iPhone and Android.">
   <meta name="twitter:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image-en.jpg">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
@@ -38,9 +38,9 @@
     "@context": "https://schema.org",
     "@type": "MobileApplication",
     "name": "Guardia",
-    "operatingSystem": "iOS",
+    "operatingSystem": "iOS, Android",
     "applicationCategory": "FinanceApplication",
-    "description": "Guardia scans your receipts and tracks returns, warranties and price drops to get back the money you're owed.",
+    "description": "Guardia scans your receipts and tracks your returns and warranties to get back the money you're owed.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
     "url": "https://apps.apple.com/app/id6780266787",
     "publisher": { "@type": "Organization", "name": "Réseau É-Mergence Inc." },
@@ -175,6 +175,8 @@
     .store-badge img { height: 54px; width: auto; display: block; }
     .store-badge { display: inline-block; transition: transform .15s; }
     .store-badge:hover { transform: translateY(-2px); }
+    .store-badges { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+    .cta-final .store-badges { justify-content: center; }
     .hero-note { color: var(--muted); font-size: .9rem; margin-top: 1.1rem; }
 
     /* Mockup iPhone */
@@ -351,6 +353,7 @@
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
       .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+      .hero .store-badges { justify-content: center; }
       .hero .lede { margin-left: auto; margin-right: auto; }
       .hero .phone-col { order: -1; }
       .phone { width: min(250px, 66vw); }
@@ -393,7 +396,7 @@
         <a href="./" lang="fr" hreflang="fr-CA" aria-label="Version française">FR</a>
         <a href="en.html" lang="en" aria-current="true">EN</a>
       </div>
-      <a class="btn header-cta" href="https://apps.apple.com/app/id6780266787">Download</a>
+      <a class="btn header-cta" href="#download">Download</a>
     </div>
   </header>
 
@@ -403,13 +406,18 @@
     <section class="hero" aria-labelledby="titre-heros">
       <div class="wrap">
         <div>
-          <p class="eyebrow">Available on the App Store</p>
+          <p class="eyebrow">Available on the App Store and Google Play</p>
           <h1 id="titre-heros">Get back the <em>money</em> you're owed.</h1>
-          <p class="lede">Forgotten returns, warranties never claimed, invisible price drops: every year, you leave hundreds of dollars on the table. Guardia scans your receipts and keeps watch over everything — so nothing slips by again.</p>
+          <p class="lede">Forgotten returns, warranties never claimed, unused credit card protections: every year, you leave hundreds of dollars on the table. Guardia scans your receipts and keeps watch over everything — so nothing slips by again.</p>
+          <div class="store-badges">
           <a class="store-badge" href="https://apps.apple.com/app/id6780266787" aria-label="Download Guardia on the App Store">
             <img src="assets/img/badge-app-store-en.svg" alt="Download on the App Store" width="152" height="54">
           </a>
-          <p class="hero-note">Free — up to 5 tracked items&nbsp;· iPhone&nbsp;· English &amp; French</p>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.alecnadeau.guardia" aria-label="Get Guardia on Google Play">
+            <img src="assets/img/badge-google-play-en.png" alt="Get it on Google Play" width="181" height="54">
+          </a>
+        </div>
+          <p class="hero-note">Free — up to 5 tracked items&nbsp;· iPhone &amp; Android&nbsp;· English &amp; French</p>
         </div>
         <div class="phone-col">
           <div class="phone phone--glow">
@@ -445,11 +453,11 @@
           </article>
           <article class="card reveal">
             <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 13V7h-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             </div>
-            <span class="tag">Prices</span>
-            <h3>The drop you never see</h3>
-            <p>The price falls two weeks after your purchase. Many retailers refund the difference — but you have to know about it, and ask in time.</p>
+            <span class="tag">Cards</span>
+            <h3>The warranty your card already gives you</h3>
+            <p>Many credit cards extend the manufacturer's warranty, often by a year. Almost nobody uses it: you'd need to know which card, which purchase, and until when.</p>
           </article>
         </div>
       </div>
@@ -475,7 +483,7 @@
               <div class="step-num" aria-hidden="true">2</div>
               <div>
                 <h3>Guardia keeps watch for you</h3>
-                <p>Return windows, warranty periods, price changes: everything is tracked automatically, item by item.</p>
+                <p>Return windows, warranty periods, card protections: everything is tracked automatically, item by item.</p>
               </div>
             </div>
             <div class="step reveal">
@@ -520,17 +528,17 @@
             </article>
             <article class="card reveal">
               <div class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13V7a2 2 0 0 0-2-2h-5L3 15l6 6 10-8z" transform="translate(0,-1)"/><circle cx="15.5" cy="8.5" r="1.3"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
               </div>
-              <h3>Price drop alerts</h3>
-              <p>Price dropped after you bought? Guardia prepares your price adjustment request: a pre-written email and a PDF proof of purchase — all that's left is to hit send.</p>
+              <h3>Extended warranty from your card</h3>
+              <p>Some credit cards extend the warranty on your purchases. Add your cards and Guardia applies the extension, item by item (Pro).</p>
             </article>
             <article class="card reveal">
               <div class="icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
               </div>
               <h3>Email import &amp; claims</h3>
-              <p>Connect Gmail or Outlook and your online receipts import themselves (Pro). For every claim — return, warranty, adjustment — Guardia generates the email and the PDF proof of purchase.</p>
+              <p>Connect your Outlook inbox and your online receipts import themselves (Pro). For every claim, return or warranty, Guardia generates the email and the PDF proof of purchase.</p>
             </article>
           </div>
           <div class="phone-col reveal">
@@ -558,7 +566,6 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Up to 5 tracked items</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>AI receipt scanning</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Return &amp; warranty tracking</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Price drop alerts</li>
             </ul>
           </article>
           <article class="plan plan--pro reveal">
@@ -571,7 +578,7 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Automatic email receipt import</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>AI web-based warranty verification</li>
             </ul>
-            <p class="fineprint">Auto-renewing subscription, cancellable anytime from the App Store.</p>
+            <p class="fineprint">Auto-renewing subscription, cancellable anytime from the App Store or Google Play.</p>
           </article>
         </div>
       </div>
@@ -606,7 +613,7 @@
           <details class="faq-item reveal">
             <summary>Which devices is Guardia available on?</summary>
             <div class="faq-body">
-              <p>Guardia is available on iPhone via the App Store, in English and French. An Android version is in the works — coming soon to the Play Store.</p>
+              <p>Guardia is available on iPhone (App Store) and Android (Google Play, in Canada), in English and French.</p>
             </div>
           </details>
           <details class="faq-item reveal">
@@ -620,13 +627,18 @@
     </section>
 
     <!-- ================= CTA FINAL ================= -->
-    <section class="cta-final" aria-labelledby="titre-cta">
+    <section class="cta-final" id="download" aria-labelledby="titre-cta">
       <div class="wrap">
         <h2 id="titre-cta" class="reveal">Your next purchase deserves a guardian.</h2>
         <p class="reveal">Download Guardia, scan your first receipt, and let it watch over your money.</p>
-        <a class="store-badge reveal" href="https://apps.apple.com/app/id6780266787" aria-label="Download Guardia on the App Store">
+        <div class="store-badges reveal">
+        <a class="store-badge" href="https://apps.apple.com/app/id6780266787" aria-label="Download Guardia on the App Store">
           <img src="assets/img/badge-app-store-en.svg" alt="Download on the App Store" width="152" height="54">
         </a>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.alecnadeau.guardia" aria-label="Get Guardia on Google Play">
+          <img src="assets/img/badge-google-play-en.png" alt="Get it on Google Play" width="181" height="54">
+        </a>
+      </div>
       </div>
     </section>
   </main>
