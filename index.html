@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guardia — Récupère l'argent qu'on te doit</title>
-  <meta name="description" content="Guardia scanne tes reçus et surveille tes retours et tes garanties. Récupère l'argent qu'on te doit. Gratuit sur iPhone et Android.">
+  <title>Guardia · Récupère l'argent qu'on te doit</title>
+  <meta name="description" content="Prends tes reçus en photo : Guardia les garde pour toi, suit tes retours et tes garanties, et te rappelle chaque échéance. Gratuit sur iPhone et Android.">
   <meta name="apple-itunes-app" content="app-id=6780266787">
   <link rel="canonical" href="https://guardia.reseau-emergence.ca/">
   <link rel="alternate" hreflang="fr-CA" href="https://guardia.reseau-emergence.ca/">
@@ -14,21 +14,21 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Guardia">
   <meta property="og:locale" content="fr_CA">
-  <meta property="og:title" content="Guardia — Récupère l'argent qu'on te doit">
-  <meta property="og:description" content="Tes reçus. Tes garanties. Ton argent. Guardia scanne tes reçus et surveille tes retours et tes garanties, pour que plus rien ne t'échappe.">
+  <meta property="og:title" content="Guardia · Récupère l'argent qu'on te doit">
+  <meta property="og:description" content="Tes reçus. Tes garanties. Ton argent. Prends tes reçus en photo : Guardia les garde, suit tes retours et tes garanties, et te rappelle chaque échéance.">
   <meta property="og:url" content="https://guardia.reseau-emergence.ca/">
   <meta property="og:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="500">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Guardia — Récupère l'argent qu'on te doit">
+  <meta name="twitter:title" content="Guardia · Récupère l'argent qu'on te doit">
   <meta name="twitter:description" content="Tes reçus. Tes garanties. Ton argent. Gratuit sur iPhone et Android.">
   <meta name="twitter:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image.jpg">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <link rel="preload" as="image" href="assets/img/screen-accueil.webp">
+  <link rel="preload" as="image" href="assets/img/app-coffre.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
     "name": "Guardia",
     "operatingSystem": "iOS, Android",
     "applicationCategory": "FinanceApplication",
-    "description": "Guardia scanne tes reçus et surveille tes retours et tes garanties pour récupérer l'argent qu'on te doit.",
+    "description": "Guardia garde tes reçus, suit tes retours et tes garanties, et te rappelle chaque échéance pour récupérer l'argent qu'on te doit.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
     "url": "https://apps.apple.com/app/id6780266787",
     "publisher": { "@type": "Organization", "name": "Réseau É-Mergence Inc." },
@@ -118,7 +118,7 @@
     .site-nav { margin-left: auto; display: flex; gap: 1.75rem; }
     .site-nav a {
       color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem;
-      transition: color .15s;
+      transition: color .15s; white-space: nowrap;
     }
     .site-nav a:hover { color: var(--text); }
     .btn {
@@ -234,20 +234,103 @@
     .card p { color: var(--muted); font-size: .97rem; }
 
     /* ---------- Comment ça marche ---------- */
-    .how .wrap {
-      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center;
+    .how-steps {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1.25rem, 2.5vw, 2rem);
     }
-    .steps { display: flex; flex-direction: column; gap: 1.75rem; counter-reset: step; }
-    .step { display: flex; gap: 1.25rem; }
+    .how-step { display: flex; flex-direction: column; gap: 1.25rem; }
     .step-num {
-      flex: none; width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      flex: none; width: 36px; height: 36px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
       background: var(--accent); color: var(--on-accent);
-      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 1rem;
     }
-    .step h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
-    .step p { color: var(--muted); }
+    .how-step h3 { font-size: 1.15rem; font-weight: 700; margin: .75rem 0 .4rem; }
+    .how-step p { color: var(--muted); font-size: .97rem; }
+
+    /* Vignette d'une étape : capture de l'app ou illustration.
+       Les tailles internes suivent la largeur de la vignette (cqw). */
+    .shot {
+      position: relative; aspect-ratio: 4 / 5; overflow: hidden;
+      container-type: inline-size;
+      border-radius: 26px;
+      background: var(--bg);
+      border: 1px solid rgba(162, 148, 188, .22);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+    }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .shot--app::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 24%;
+      background: linear-gradient(to bottom, rgba(27, 18, 44, 0), var(--bg));
+    }
+
+    /* Étape 1 : un reçu dans le viseur, et ce que Guardia en a lu */
+    /* Pas de marge intérieure en cqw sur la vignette elle-même : ses cqw
+       renverraient au conteneur parent. Les marges vont aux enfants. */
+    .shot--scan {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: radial-gradient(120% 80% at 50% 0%, #33244f, var(--bg) 72%);
+    }
+    .viewfinder { position: relative; width: 78%; padding: 6cqw; }
+    .vf { position: absolute; width: 11cqw; height: 11cqw; border: 0 solid var(--accent); }
+    .vf-tl { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 10px; }
+    .vf-tr { top: 0; right: 0; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 10px; }
+    .vf-bl { bottom: 0; left: 0; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 10px; }
+    .vf-br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 10px; }
+    .paper {
+      background: #FBFAF6; color: #2B2B2B; border-radius: 3cqw;
+      padding: 5cqw 5cqw 6cqw;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 3.5cqw; line-height: 1.55;
+      transform: rotate(-2deg);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .4);
+    }
+    .paper p { color: inherit; font-size: inherit; }
+    .paper-store { text-align: center; font-weight: 700; font-size: 5cqw; letter-spacing: .1em; }
+    .paper-meta { text-align: center; color: #7A7A7A !important; margin-bottom: 3cqw; }
+    .paper-line, .paper-total { display: flex; justify-content: space-between; gap: 2cqw; }
+    .paper-total { border-top: 1px dashed #B5B5B5; margin-top: 2.5cqw; padding-top: 2.5cqw; font-weight: 700; }
+    .scanline {
+      position: absolute; left: 4cqw; right: 4cqw; top: 14%; height: 2px;
+      background: var(--accent); box-shadow: 0 0 14px var(--accent);
+      animation: scan 3.2s ease-in-out infinite;
+    }
+    @keyframes scan { 0%, 100% { top: 14%; } 50% { top: 84%; } }
+    .read-chip {
+      display: inline-flex; align-items: center; gap: 1.6cqw;
+      background: rgba(77, 239, 166, .14); color: var(--accent) !important;
+      border: 1px solid rgba(77, 239, 166, .4);
+      font-size: 4.1cqw !important; font-weight: 600; white-space: nowrap;
+      padding: 1.8cqw 3.6cqw; border-radius: 999px; margin-top: 7cqw;
+    }
+    .read-chip svg { width: 4.4cqw; height: 4.4cqw; flex: none; }
+
+    /* Étape 4 : l'écran verrouillé avec deux rappels de Guardia */
+    .shot--notif {
+      text-align: center; color: #fff;
+      background: linear-gradient(165deg, #45346b 0%, #241838 55%, #160F24 100%);
+    }
+    .shot--notif p { color: inherit; }
+    .ls-date { font-size: 4.6cqw !important; opacity: .82; margin: 10cqw 6cqw 0; }
+    .ls-time {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 18cqw !important; line-height: 1; margin: 1cqw 6cqw 8cqw;
+    }
+    .notif {
+      display: flex; gap: 3cqw; align-items: flex-start; text-align: left;
+      background: rgba(255, 255, 255, .13);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border-radius: 6cqw; padding: 3.8cqw 4cqw; margin: 0 6cqw 3cqw;
+    }
+    .notif img { width: 9.5cqw; height: 9.5cqw; border-radius: 2.4cqw; flex: none; }
+    .notif-text { min-width: 0; flex: 1; }
+    .notif-app {
+      display: flex; justify-content: space-between; gap: 2cqw;
+      font-size: 3.3cqw !important; letter-spacing: .05em; opacity: .7;
+    }
+    .notif-title { font-size: 4.3cqw !important; font-weight: 700; line-height: 1.3; margin-top: .5cqw; }
+    .notif-body { font-size: 4cqw !important; line-height: 1.35; opacity: .92; }
 
     /* ---------- Fonctionnalités ---------- */
     .features .wrap-inner {
@@ -355,15 +438,22 @@
       .hero .wrap { grid-template-columns: 1fr; text-align: center; }
       .hero .store-badges { justify-content: center; }
       .hero .lede { margin-left: auto; margin-right: auto; }
-      .hero .phone-col { order: -1; }
+      .hero .phone-col { margin-top: .5rem; }
+      .site-nav { display: none; }
+      .lang-switch { margin-left: auto; }
       .phone { width: min(250px, 66vw); }
       .cards { grid-template-columns: 1fr; }
-      .how .wrap { grid-template-columns: 1fr; }
-      .how .phone-col { display: none; }
+      .how-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; }
       .features .wrap-inner { grid-template-columns: 1fr; }
       .features .phone-col { display: none; }
       .features .cards { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .how-steps { grid-template-columns: 1fr; gap: 3rem; }
+      .how-step { text-align: center; }
+      .how-step .shot { width: min(270px, 74vw); margin: 0 auto; }
+      .how .section-head { text-align: center; margin-left: auto; margin-right: auto; }
     }
     @media (max-width: 720px) {
       .site-nav { display: none; }
@@ -382,7 +472,7 @@
 
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="#" aria-label="Guardia — retour en haut">
+      <a class="brand" href="#" aria-label="Guardia, retour en haut">
         <img src="assets/img/logo-192.png" alt="" width="36" height="36">
         <span>GUARDIA</span>
       </a>
@@ -408,7 +498,7 @@
         <div>
           <p class="eyebrow">Disponible sur l'App Store et Google Play</p>
           <h1 id="titre-heros">Récupère <em>l'argent</em> qu'on te doit.</h1>
-          <p class="lede">Retours oubliés, garanties jamais réclamées, protections de carte de crédit inutilisées&nbsp;: chaque année, tu laisses des centaines de dollars sur la table. Guardia scanne tes reçus et surveille tout — pour que plus rien ne t'échappe.</p>
+          <p class="lede">Prends tes reçus en photo. Guardia les garde pour toi, suit tes délais de retour et tes garanties, et te prévient avant qu'il soit trop tard.</p>
           <div class="store-badges">
           <a class="store-badge" href="https://apps.apple.com/app/id6780266787" aria-label="Télécharger Guardia dans l'App Store">
             <img src="assets/img/badge-app-store-fr.svg" alt="Télécharger dans l'App Store" width="152" height="54">
@@ -417,13 +507,94 @@
             <img src="assets/img/badge-google-play-fr.png" alt="Disponible sur Google Play" width="182" height="54">
           </a>
         </div>
-          <p class="hero-note">Gratuit — jusqu'à 5 articles suivis&nbsp;· iPhone et Android&nbsp;· Français &amp; English</p>
+          <p class="hero-note">Gratuit jusqu'à 5 articles suivis&nbsp;· iPhone et Android&nbsp;· Français &amp; English</p>
         </div>
         <div class="phone-col">
           <div class="phone phone--glow">
-            <img src="assets/img/screen-accueil.webp" alt="Écran d'accueil de Guardia : total récupéré, retours encore possibles, garanties actives et reçus classés par magasin" width="780" height="1560">
+            <img src="assets/img/app-coffre.webp" alt="Écran d'accueil de Guardia : l'argent à récupérer, les retours encore possibles, les garanties actives et les reçus rangés par magasin" width="660" height="1434">
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= COMMENT ÇA MARCHE ================= -->
+    <section id="comment-ca-marche" class="how" aria-labelledby="titre-comment">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">Comment ça marche</p>
+          <h2 id="titre-comment">C'est simple comme une photo.</h2>
+          <p>Fini la boîte à chaussures pleine de factures. Guardia s'occupe du reste.</p>
+        </div>
+        <ol class="how-steps">
+          <li class="how-step reveal">
+            <div class="shot shot--scan" aria-hidden="true">
+              <div class="viewfinder">
+                <span class="vf vf-tl"></span><span class="vf vf-tr"></span><span class="vf vf-bl"></span><span class="vf vf-br"></span>
+                <div class="paper">
+                  <p class="paper-store">BEST BUY</p>
+                  <p class="paper-meta">26/09/2026 14:32</p>
+                  <p class="paper-line"><span>AIRPODS PRO 2</span><span>329,99</span></p>
+                  <p class="paper-line"><span>QTÉ 1</span><span></span></p>
+                  <p class="paper-total"><span>TOTAL</span><span>329,99 $</span></p>
+                </div>
+                <span class="scanline"></span>
+              </div>
+              <p class="read-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Best Buy · 26 sept. · 329,99&nbsp;$</p>
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">1</span>
+              <h3>Prends ta facture en photo</h3>
+              <p>À la caisse ou à la maison, une photo suffit. Guardia lit le magasin, la date, les articles et les montants à ta place.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--app">
+              <img src="assets/img/app-dossier.webp" alt="Le dossier Best Buy dans Guardia : deux reçus rangés, avec leurs échéances" width="600" height="750" loading="lazy">
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">2</span>
+              <h3>Guardia la garde pour toi</h3>
+              <p>Tes reçus sont rangés par magasin, en sécurité dans ton compte. Tu retrouves n'importe lequel en deux secondes.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--app">
+              <img src="assets/img/app-garanties.webp" alt="La liste des garanties actives dans Guardia, article par article" width="600" height="750" loading="lazy">
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">3</span>
+              <h3>Ta bibliothèque de garanties se fait toute seule</h3>
+              <p>Pour chaque article, Guardia note la date limite de retour et la fin de la garantie. Tu sais toujours ce qui est encore couvert.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--notif" aria-hidden="true">
+              <p class="ls-date">vendredi 23 octobre</p>
+              <p class="ls-time">9:41</p>
+              <div class="notif">
+                <img src="assets/img/logo-192.png" alt="" width="40" height="40">
+                <div class="notif-text">
+                  <p class="notif-app"><span>GUARDIA</span><span>maintenant</span></p>
+                  <p class="notif-title">Retour bientôt expiré</p>
+                  <p class="notif-body">Plus que 3 jours pour retourner votre achat chez Best Buy.</p>
+                </div>
+              </div>
+              <div class="notif">
+                <img src="assets/img/logo-192.png" alt="" width="40" height="40">
+                <div class="notif-text">
+                  <p class="notif-app"><span>GUARDIA</span><span>il y a 2 h</span></p>
+                  <p class="notif-title">Garantie bientôt expirée</p>
+                  <p class="notif-body">La garantie de « Perceuse sans fil 20V » expire dans 30 jours.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">4</span>
+              <h3>Tu reçois un rappel avant chaque échéance</h3>
+              <p>7, 3 et 1 jour avant la fin d'un retour. 90, 30 et 7 jours avant la fin d'une garantie. Tu as le temps d'agir.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -431,7 +602,7 @@
     <section id="probleme" aria-labelledby="titre-probleme">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="kicker">Le problème</p>
+          <p class="kicker">Pourquoi Guardia</p>
           <h2 id="titre-probleme">L'argent que tu perds sans t'en rendre compte</h2>
         </div>
         <div class="cards">
@@ -449,7 +620,7 @@
             </div>
             <span class="tag">Garanties</span>
             <h3>Couvert, mais jamais réclamé</h3>
-            <p>Tes écouteurs brisent à 11&nbsp;mois. La garantie couvrait — mais qui garde ses reçus et connaît les modalités&nbsp;? Résultat&nbsp;: tu rachètes de ta poche.</p>
+            <p>Tes écouteurs brisent à 11&nbsp;mois. La garantie couvrait, mais qui garde ses reçus et connaît les modalités&nbsp;? Résultat&nbsp;: tu rachètes de ta poche.</p>
           </article>
           <article class="card reveal">
             <div class="icon" aria-hidden="true">
@@ -459,46 +630,6 @@
             <h3>La garantie que ta carte offre déjà</h3>
             <p>Plusieurs cartes de crédit prolongent la garantie du fabricant, souvent d'un an. Presque personne ne s'en sert&nbsp;: il faudrait savoir quelle carte, quel achat, et jusqu'à quand.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= COMMENT ÇA MARCHE ================= -->
-    <section id="comment-ca-marche" class="how" aria-labelledby="titre-comment">
-      <div class="wrap">
-        <div>
-          <div class="section-head reveal">
-            <p class="kicker">Comment ça marche</p>
-            <h2 id="titre-comment">Une photo. Guardia s'occupe du reste.</h2>
-          </div>
-          <div class="steps">
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">1</div>
-              <div>
-                <h3>Scanne ton reçu</h3>
-                <p>Une simple photo. L'IA extrait le marchand, la date, les articles et les montants — sans que tu tapes quoi que ce soit.</p>
-              </div>
-            </div>
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">2</div>
-              <div>
-                <h3>Guardia surveille pour toi</h3>
-                <p>Fenêtres de retour, durées de garantie, protections de tes cartes&nbsp;: tout est suivi automatiquement, article par article.</p>
-              </div>
-            </div>
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">3</div>
-              <div>
-                <h3>Tu récupères ton argent</h3>
-                <p>Dès qu'il y a une occasion, tu reçois une alerte claire avec quoi faire, et quand.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-col reveal">
-          <div class="phone">
-            <img src="assets/img/screen-scan.webp" alt="Écran de scan de Guardia : prendre une photo du reçu, importer depuis la galerie ou saisir manuellement" width="780" height="1560" loading="lazy">
-          </div>
         </div>
       </div>
     </section>
@@ -517,7 +648,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
               </div>
               <h3>Fenêtres de retour</h3>
-              <p>Chaque article a sa date limite de retour, calculée selon la politique du marchand. Guardia te rappelle 7, 3 et 1&nbsp;jours avant l'échéance — plus rien n'expire en silence.</p>
+              <p>Chaque article a sa date limite de retour, calculée selon la politique du marchand. Guardia te rappelle 7, 3 et 1&nbsp;jour avant l'échéance&nbsp;: plus rien n'expire en silence.</p>
             </article>
             <article class="card reveal">
               <div class="icon" aria-hidden="true">
@@ -543,7 +674,7 @@
           </div>
           <div class="phone-col reveal">
             <div class="phone">
-              <img src="assets/img/screen-detail.webp" alt="Détail d'un reçu dans Guardia : échéances de retour et de garantie par article, bouton Récupérer mon argent" width="780" height="1560" loading="lazy">
+              <img src="assets/img/app-detail.webp" alt="Fiche d'un reçu dans Guardia : échéances de retour et de garantie de l'article, bouton Récupérer mon argent" width="660" height="1434" loading="lazy">
             </div>
           </div>
         </div>
@@ -607,7 +738,7 @@
           <details class="faq-item reveal">
             <summary>Mes données sont-elles en sécurité&nbsp;?</summary>
             <div class="faq-body">
-              <p>Oui. Ton compte est protégé (connexion par courriel, Google ou Apple), tes données sont chiffrées en transit et stockées sur une infrastructure sécurisée où chaque compte est strictement isolé. Tes reçus t'appartiennent&nbsp;: ils ne sont jamais vendus ni partagés. Les détails sont dans notre <a href="privacy-policy.html">politique de confidentialité</a>.</p>
+              <p>Oui. Ton compte est protégé (connexion par courriel, Google ou Apple), tes données sont chiffrées en transit et stockées sur une infrastructure sécurisée où chaque compte est strictement isolé. Tes reçus t'appartiennent&nbsp;: leur contenu n'est jamais vendu ni partagé. La mesure publicitaire (Meta) est désactivée par défaut et ne s'active qu'avec ton accord. Les détails sont dans notre <a href="privacy-policy.html">politique de confidentialité</a>.</p>
             </div>
           </details>
           <details class="faq-item reveal">
@@ -619,7 +750,7 @@
           <details class="faq-item reveal">
             <summary>Guardia fait-elle les démarches à ma place&nbsp;?</summary>
             <div class="faq-body">
-              <p>Guardia prépare tout pour que la démarche te prenne deux minutes&nbsp;: échéances suivies, courriel de réclamation déjà rédigé, preuve d'achat en PDF. L'envoi final reste entre tes mains — c'est toi qui appuies sur «&nbsp;envoyer&nbsp;», pour garder le plein contrôle sur tes communications.</p>
+              <p>Guardia prépare tout pour que la démarche te prenne deux minutes&nbsp;: échéances suivies, courriel de réclamation déjà rédigé, preuve d'achat en PDF. L'envoi final reste entre tes mains&nbsp;: c'est toi qui appuies sur «&nbsp;envoyer&nbsp;», pour garder le plein contrôle sur tes communications.</p>
             </div>
           </details>
         </div>
@@ -645,7 +776,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <a class="brand" href="#" aria-label="Guardia — retour en haut">
+      <a class="brand" href="#" aria-label="Guardia, retour en haut">
         <img src="assets/img/logo-192.png" alt="" width="30" height="30">
         GUARDIA
       </a>

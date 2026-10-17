@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guardia — Get back the money you're owed</title>
-  <meta name="description" content="Guardia scans your receipts and tracks your returns and warranties. Get back the money you're owed. Free on iPhone and Android.">
+  <title>Guardia · Get back the money you're owed</title>
+  <meta name="description" content="Snap your receipts: Guardia keeps them for you, tracks your returns and warranties, and reminds you before every deadline. Free on iPhone and Android.">
   <meta name="apple-itunes-app" content="app-id=6780266787">
   <link rel="canonical" href="https://guardia.reseau-emergence.ca/en.html">
   <link rel="alternate" hreflang="fr-CA" href="https://guardia.reseau-emergence.ca/">
@@ -14,21 +14,21 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Guardia">
   <meta property="og:locale" content="en_CA">
-  <meta property="og:title" content="Guardia — Get back the money you're owed">
-  <meta property="og:description" content="Your receipts. Your warranties. Your money. Guardia scans your receipts and tracks your returns and warranties, so nothing slips by again.">
+  <meta property="og:title" content="Guardia · Get back the money you're owed">
+  <meta property="og:description" content="Your receipts. Your warranties. Your money. Snap your receipts: Guardia keeps them, tracks your returns and warranties, and reminds you before every deadline.">
   <meta property="og:url" content="https://guardia.reseau-emergence.ca/en.html">
   <meta property="og:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image-en.jpg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="500">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Guardia — Get back the money you're owed">
+  <meta name="twitter:title" content="Guardia · Get back the money you're owed">
   <meta name="twitter:description" content="Your receipts. Your warranties. Your money. Free on iPhone and Android.">
   <meta name="twitter:image" content="https://guardia.reseau-emergence.ca/assets/img/og-image-en.jpg">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <link rel="preload" as="image" href="assets/img/screen-accueil-en.webp">
+  <link rel="preload" as="image" href="assets/img/app-coffre-en.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
     "name": "Guardia",
     "operatingSystem": "iOS, Android",
     "applicationCategory": "FinanceApplication",
-    "description": "Guardia scans your receipts and tracks your returns and warranties to get back the money you're owed.",
+    "description": "Guardia keeps your receipts, tracks your returns and warranties, and reminds you before every deadline to get back the money you're owed.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
     "url": "https://apps.apple.com/app/id6780266787",
     "publisher": { "@type": "Organization", "name": "Réseau É-Mergence Inc." },
@@ -118,7 +118,7 @@
     .site-nav { margin-left: auto; display: flex; gap: 1.75rem; }
     .site-nav a {
       color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem;
-      transition: color .15s;
+      transition: color .15s; white-space: nowrap;
     }
     .site-nav a:hover { color: var(--text); }
     .btn {
@@ -234,20 +234,103 @@
     .card p { color: var(--muted); font-size: .97rem; }
 
     /* ---------- Comment ça marche ---------- */
-    .how .wrap {
-      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center;
+    .how-steps {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1.25rem, 2.5vw, 2rem);
     }
-    .steps { display: flex; flex-direction: column; gap: 1.75rem; counter-reset: step; }
-    .step { display: flex; gap: 1.25rem; }
+    .how-step { display: flex; flex-direction: column; gap: 1.25rem; }
     .step-num {
-      flex: none; width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      flex: none; width: 36px; height: 36px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
       background: var(--accent); color: var(--on-accent);
-      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 1rem;
     }
-    .step h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
-    .step p { color: var(--muted); }
+    .how-step h3 { font-size: 1.15rem; font-weight: 700; margin: .75rem 0 .4rem; }
+    .how-step p { color: var(--muted); font-size: .97rem; }
+
+    /* Vignette d'une étape : capture de l'app ou illustration.
+       Les tailles internes suivent la largeur de la vignette (cqw). */
+    .shot {
+      position: relative; aspect-ratio: 4 / 5; overflow: hidden;
+      container-type: inline-size;
+      border-radius: 26px;
+      background: var(--bg);
+      border: 1px solid rgba(162, 148, 188, .22);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+    }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .shot--app::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 24%;
+      background: linear-gradient(to bottom, rgba(27, 18, 44, 0), var(--bg));
+    }
+
+    /* Étape 1 : un reçu dans le viseur, et ce que Guardia en a lu */
+    /* Pas de marge intérieure en cqw sur la vignette elle-même : ses cqw
+       renverraient au conteneur parent. Les marges vont aux enfants. */
+    .shot--scan {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: radial-gradient(120% 80% at 50% 0%, #33244f, var(--bg) 72%);
+    }
+    .viewfinder { position: relative; width: 78%; padding: 6cqw; }
+    .vf { position: absolute; width: 11cqw; height: 11cqw; border: 0 solid var(--accent); }
+    .vf-tl { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 10px; }
+    .vf-tr { top: 0; right: 0; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 10px; }
+    .vf-bl { bottom: 0; left: 0; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 10px; }
+    .vf-br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 10px; }
+    .paper {
+      background: #FBFAF6; color: #2B2B2B; border-radius: 3cqw;
+      padding: 5cqw 5cqw 6cqw;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 3.5cqw; line-height: 1.55;
+      transform: rotate(-2deg);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .4);
+    }
+    .paper p { color: inherit; font-size: inherit; }
+    .paper-store { text-align: center; font-weight: 700; font-size: 5cqw; letter-spacing: .1em; }
+    .paper-meta { text-align: center; color: #7A7A7A !important; margin-bottom: 3cqw; }
+    .paper-line, .paper-total { display: flex; justify-content: space-between; gap: 2cqw; }
+    .paper-total { border-top: 1px dashed #B5B5B5; margin-top: 2.5cqw; padding-top: 2.5cqw; font-weight: 700; }
+    .scanline {
+      position: absolute; left: 4cqw; right: 4cqw; top: 14%; height: 2px;
+      background: var(--accent); box-shadow: 0 0 14px var(--accent);
+      animation: scan 3.2s ease-in-out infinite;
+    }
+    @keyframes scan { 0%, 100% { top: 14%; } 50% { top: 84%; } }
+    .read-chip {
+      display: inline-flex; align-items: center; gap: 1.6cqw;
+      background: rgba(77, 239, 166, .14); color: var(--accent) !important;
+      border: 1px solid rgba(77, 239, 166, .4);
+      font-size: 4.1cqw !important; font-weight: 600; white-space: nowrap;
+      padding: 1.8cqw 3.6cqw; border-radius: 999px; margin-top: 7cqw;
+    }
+    .read-chip svg { width: 4.4cqw; height: 4.4cqw; flex: none; }
+
+    /* Étape 4 : l'écran verrouillé avec deux rappels de Guardia */
+    .shot--notif {
+      text-align: center; color: #fff;
+      background: linear-gradient(165deg, #45346b 0%, #241838 55%, #160F24 100%);
+    }
+    .shot--notif p { color: inherit; }
+    .ls-date { font-size: 4.6cqw !important; opacity: .82; margin: 10cqw 6cqw 0; }
+    .ls-time {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 18cqw !important; line-height: 1; margin: 1cqw 6cqw 8cqw;
+    }
+    .notif {
+      display: flex; gap: 3cqw; align-items: flex-start; text-align: left;
+      background: rgba(255, 255, 255, .13);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border-radius: 6cqw; padding: 3.8cqw 4cqw; margin: 0 6cqw 3cqw;
+    }
+    .notif img { width: 9.5cqw; height: 9.5cqw; border-radius: 2.4cqw; flex: none; }
+    .notif-text { min-width: 0; flex: 1; }
+    .notif-app {
+      display: flex; justify-content: space-between; gap: 2cqw;
+      font-size: 3.3cqw !important; letter-spacing: .05em; opacity: .7;
+    }
+    .notif-title { font-size: 4.3cqw !important; font-weight: 700; line-height: 1.3; margin-top: .5cqw; }
+    .notif-body { font-size: 4cqw !important; line-height: 1.35; opacity: .92; }
 
     /* ---------- Fonctionnalités ---------- */
     .features .wrap-inner {
@@ -355,15 +438,22 @@
       .hero .wrap { grid-template-columns: 1fr; text-align: center; }
       .hero .store-badges { justify-content: center; }
       .hero .lede { margin-left: auto; margin-right: auto; }
-      .hero .phone-col { order: -1; }
+      .hero .phone-col { margin-top: .5rem; }
+      .site-nav { display: none; }
+      .lang-switch { margin-left: auto; }
       .phone { width: min(250px, 66vw); }
       .cards { grid-template-columns: 1fr; }
-      .how .wrap { grid-template-columns: 1fr; }
-      .how .phone-col { display: none; }
+      .how-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; }
       .features .wrap-inner { grid-template-columns: 1fr; }
       .features .phone-col { display: none; }
       .features .cards { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .how-steps { grid-template-columns: 1fr; gap: 3rem; }
+      .how-step { text-align: center; }
+      .how-step .shot { width: min(270px, 74vw); margin: 0 auto; }
+      .how .section-head { text-align: center; margin-left: auto; margin-right: auto; }
     }
     @media (max-width: 720px) {
       .site-nav { display: none; }
@@ -382,7 +472,7 @@
 
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="#" aria-label="Guardia — back to top">
+      <a class="brand" href="#" aria-label="Guardia, back to top">
         <img src="assets/img/logo-192.png" alt="" width="36" height="36">
         <span>GUARDIA</span>
       </a>
@@ -408,7 +498,7 @@
         <div>
           <p class="eyebrow">Available on the App Store and Google Play</p>
           <h1 id="titre-heros">Get back the <em>money</em> you're owed.</h1>
-          <p class="lede">Forgotten returns, warranties never claimed, unused credit card protections: every year, you leave hundreds of dollars on the table. Guardia scans your receipts and keeps watch over everything — so nothing slips by again.</p>
+          <p class="lede">Snap a photo of your receipts. Guardia keeps them for you, tracks your return windows and warranties, and reminds you before it's too late.</p>
           <div class="store-badges">
           <a class="store-badge" href="https://apps.apple.com/app/id6780266787" aria-label="Download Guardia on the App Store">
             <img src="assets/img/badge-app-store-en.svg" alt="Download on the App Store" width="152" height="54">
@@ -417,13 +507,94 @@
             <img src="assets/img/badge-google-play-en.png" alt="Get it on Google Play" width="181" height="54">
           </a>
         </div>
-          <p class="hero-note">Free — up to 5 tracked items&nbsp;· iPhone &amp; Android&nbsp;· English &amp; French</p>
+          <p class="hero-note">Free for up to 5 tracked items&nbsp;· iPhone &amp; Android&nbsp;· English &amp; French</p>
         </div>
         <div class="phone-col">
           <div class="phone phone--glow">
-            <img src="assets/img/screen-accueil-en.webp" alt="Guardia home screen: total recovered, returns still open, active warranties and receipts organized by store" width="780" height="1560">
+            <img src="assets/img/app-coffre-en.webp" alt="Guardia home screen: money to recover, open returns, active warranties and receipts sorted by store" width="660" height="1434">
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= COMMENT ÇA MARCHE ================= -->
+    <section id="comment-ca-marche" class="how" aria-labelledby="titre-comment">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">How it works</p>
+          <h2 id="titre-comment">As simple as taking a photo.</h2>
+          <p>No more shoebox full of receipts. Guardia handles the rest.</p>
+        </div>
+        <ol class="how-steps">
+          <li class="how-step reveal">
+            <div class="shot shot--scan" aria-hidden="true">
+              <div class="viewfinder">
+                <span class="vf vf-tl"></span><span class="vf vf-tr"></span><span class="vf vf-bl"></span><span class="vf vf-br"></span>
+                <div class="paper">
+                  <p class="paper-store">BEST BUY</p>
+                  <p class="paper-meta">09/26/2026 2:32 PM</p>
+                  <p class="paper-line"><span>AIRPODS PRO 2</span><span>329.99</span></p>
+                  <p class="paper-line"><span>QTY 1</span><span></span></p>
+                  <p class="paper-total"><span>TOTAL</span><span>$329.99</span></p>
+                </div>
+                <span class="scanline"></span>
+              </div>
+              <p class="read-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Best Buy · Sep 26 · $329.99</p>
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">1</span>
+              <h3>Snap your receipt</h3>
+              <p>At the checkout or at home, one photo is enough. Guardia reads the store, date, items and amounts for you.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--app">
+              <img src="assets/img/app-dossier-en.webp" alt="The Best Buy folder in Guardia: two receipts with their deadlines" width="600" height="750" loading="lazy">
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">2</span>
+              <h3>Guardia keeps it for you</h3>
+              <p>Your receipts are sorted by store and kept safe in your account. Find any of them in two seconds.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--app">
+              <img src="assets/img/app-garanties-en.webp" alt="The list of active warranties in Guardia, item by item" width="600" height="750" loading="lazy">
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">3</span>
+              <h3>Your warranty library builds itself</h3>
+              <p>For every item, Guardia records the return deadline and when the warranty ends. You always know what's still covered.</p>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <div class="shot shot--notif" aria-hidden="true">
+              <p class="ls-date">Friday, October 23</p>
+              <p class="ls-time">9:41</p>
+              <div class="notif">
+                <img src="assets/img/logo-192.png" alt="" width="40" height="40">
+                <div class="notif-text">
+                  <p class="notif-app"><span>GUARDIA</span><span>now</span></p>
+                  <p class="notif-title">Return window closing</p>
+                  <p class="notif-body">3 days left to return your purchase at Best Buy.</p>
+                </div>
+              </div>
+              <div class="notif">
+                <img src="assets/img/logo-192.png" alt="" width="40" height="40">
+                <div class="notif-text">
+                  <p class="notif-app"><span>GUARDIA</span><span>2h ago</span></p>
+                  <p class="notif-title">Warranty expiring</p>
+                  <p class="notif-body">Warranty for "Cordless drill 20V" expires in 30 days.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="step-num" aria-hidden="true">4</span>
+              <h3>Get a reminder before every deadline</h3>
+              <p>7, 3 and 1 day before a return window closes. 90, 30 and 7 days before a warranty ends. You have time to act.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -431,7 +602,7 @@
     <section id="probleme" aria-labelledby="titre-probleme">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="kicker">The problem</p>
+          <p class="kicker">Why Guardia</p>
           <h2 id="titre-probleme">The money you lose without noticing</h2>
         </div>
         <div class="cards">
@@ -449,7 +620,7 @@
             </div>
             <span class="tag">Warranties</span>
             <h3>Covered, but never claimed</h3>
-            <p>Your earbuds break at 11&nbsp;months. The warranty had you covered — but who keeps receipts and knows the fine print? So you end up paying out of pocket.</p>
+            <p>Your earbuds break at 11&nbsp;months. The warranty had you covered, but who keeps receipts and knows the fine print? So you end up paying out of pocket.</p>
           </article>
           <article class="card reveal">
             <div class="icon" aria-hidden="true">
@@ -459,46 +630,6 @@
             <h3>The warranty your card already gives you</h3>
             <p>Many credit cards extend the manufacturer's warranty, often by a year. Almost nobody uses it: you'd need to know which card, which purchase, and until when.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= COMMENT ÇA MARCHE ================= -->
-    <section id="comment-ca-marche" class="how" aria-labelledby="titre-comment">
-      <div class="wrap">
-        <div>
-          <div class="section-head reveal">
-            <p class="kicker">How it works</p>
-            <h2 id="titre-comment">One photo. Guardia does the rest.</h2>
-          </div>
-          <div class="steps">
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">1</div>
-              <div>
-                <h3>Scan your receipt</h3>
-                <p>Just one photo. AI extracts the merchant, date, items and amounts — without you typing a thing.</p>
-              </div>
-            </div>
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">2</div>
-              <div>
-                <h3>Guardia keeps watch for you</h3>
-                <p>Return windows, warranty periods, card protections: everything is tracked automatically, item by item.</p>
-              </div>
-            </div>
-            <div class="step reveal">
-              <div class="step-num" aria-hidden="true">3</div>
-              <div>
-                <h3>You get your money back</h3>
-                <p>As soon as there's an opportunity, you get a clear alert with what to do, and when.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-col reveal">
-          <div class="phone">
-            <img src="assets/img/screen-scan-en.webp" alt="Guardia scan screen: take a photo of the receipt, import from your gallery or enter manually" width="780" height="1560" loading="lazy">
-          </div>
         </div>
       </div>
     </section>
@@ -517,7 +648,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
               </div>
               <h3>Return windows</h3>
-              <p>Every item gets its own return deadline, based on the merchant's policy. Guardia reminds you 7, 3 and 1&nbsp;days before it expires — nothing slips by in silence.</p>
+              <p>Every item gets its own return deadline, based on the merchant's policy. Guardia reminds you 7, 3 and 1&nbsp;day before it expires, so nothing slips by in silence.</p>
             </article>
             <article class="card reveal">
               <div class="icon" aria-hidden="true">
@@ -543,7 +674,7 @@
           </div>
           <div class="phone-col reveal">
             <div class="phone">
-              <img src="assets/img/screen-detail-en.webp" alt="Receipt detail in Guardia: return and warranty deadlines per item, Recover my money button" width="780" height="1560" loading="lazy">
+              <img src="assets/img/app-detail-en.webp" alt="Receipt details in Guardia: the item's return and warranty deadlines, Recover my money button" width="660" height="1434" loading="lazy">
             </div>
           </div>
         </div>
@@ -607,7 +738,7 @@
           <details class="faq-item reveal">
             <summary>Is my data safe?</summary>
             <div class="faq-body">
-              <p>Yes. Your account is protected (sign in with email, Google or Apple), your data is encrypted in transit and stored on secure infrastructure where every account is strictly isolated. Your receipts are yours: they are never sold or shared. The details are in our <a href="privacy-policy-en.html">privacy policy</a>.</p>
+              <p>Yes. Your account is protected (sign in with email, Google or Apple), your data is encrypted in transit and stored on secure infrastructure where every account is strictly isolated. Your receipts are yours: their contents are never sold or shared. Ad measurement (Meta) is off by default and only turns on with your consent. The details are in our <a href="privacy-policy-en.html">privacy policy</a>.</p>
             </div>
           </details>
           <details class="faq-item reveal">
@@ -619,7 +750,7 @@
           <details class="faq-item reveal">
             <summary>Does Guardia handle claims for me?</summary>
             <div class="faq-body">
-              <p>Guardia prepares everything so a claim takes you two minutes: tracked deadlines, a pre-written claim email, a PDF proof of purchase. The final send stays in your hands — you press “send”, so you keep full control of your communications.</p>
+              <p>Guardia prepares everything so a claim takes you two minutes: tracked deadlines, a pre-written claim email, a PDF proof of purchase. The final send stays in your hands: you press “send”, so you keep full control of your communications.</p>
             </div>
           </details>
         </div>
@@ -645,7 +776,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <a class="brand" href="#" aria-label="Guardia — back to top">
+      <a class="brand" href="#" aria-label="Guardia, back to top">
         <img src="assets/img/logo-192.png" alt="" width="30" height="30">
         GUARDIA
       </a>
