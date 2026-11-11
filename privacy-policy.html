@@ -11,7 +11,7 @@
     a { color: #b79cff; }
   }</style></head><body>
 <h1>Politique de confidentialité — Guardia</h1>
-<p class="updated">Dernière mise à jour : 2026-10-05 · <a href="privacy-policy-en.html">English version</a></p>
+<p class="updated">Dernière mise à jour : 2026-11-11 · <a href="privacy-policy-en.html">English version</a></p>
 
 <h2>1. Qui sommes-nous</h2>
 <p>Guardia est une application mobile qui aide à récupérer l'argent qui vous est dû :
@@ -23,10 +23,15 @@ reçus d'achat. Contact : <a href="mailto:contact@reseau-emergence.ca">contact@r
 <li><strong>Compte</strong> : adresse e-mail (ou identifiant Google / Apple si vous utilisez la connexion sociale).</li>
 <li><strong>Reçus</strong> : photos de tickets que vous scannez, factures PDF importées, et les
 données extraites (commerçant, date, montant, articles, garanties).</li>
-<li><strong>E-mails (optionnel, sur autorisation explicite)</strong> : si vous connectez Gmail ou
-Outlook, nous lisons en lecture seule les messages ressemblant à des reçus pour en extraire
-les détails d'achat. <strong>Les e-mails eux-mêmes ne sont jamais stockés</strong> — seules les
-données de reçu extraites et, le cas échéant, la facture PDF jointe sont conservées.</li>
+<li><strong>Courriels (optionnel, sur autorisation explicite)</strong> : si vous connectez Gmail ou
+Outlook, Guardia lit en lecture seule les courriels qui contiennent un mot comme « commande »,
+« reçu » ou « facture » (hors promotions, réseaux sociaux et forums), sur les 24 derniers mois
+puis au fil des nouveaux courriels, pour y repérer vos achats de biens physiques.
+<strong>Le texte de vos courriels n'est jamais conservé.</strong> Nous gardons seulement :
+les renseignements d'achat relevés (commerçant, numéro de commande, date, montants, articles),
+l'identifiant du courriel, l'adresse de l'expéditeur (pour éviter les doublons et appliquer vos
+exclusions « Pas un achat »), un journal de décision sans contenu (catégorie, niveau de
+confiance, raison courte) et, le cas échéant, la facture PDF jointe.</li>
 <li><strong>Cartes de crédit (optionnel)</strong> : si vous enregistrez une carte pour suivre
 les extensions de garantie qu'elle vous offre, nous conservons uniquement le <strong>type de
 carte</strong> (ex. « Visa Infinite »), les <strong>4 derniers chiffres</strong> et un surnom
@@ -37,16 +42,54 @@ vos achats.</li>
 <li><strong>Abonnement</strong> : statut d'abonnement géré par RevenueCat, l'App Store et Google Play
 (nous ne voyons jamais vos informations de paiement).</li>
 <li><strong>Mesure publicitaire (optionnel, seulement avec votre accord)</strong> : voir la
-section 6.</li>
+section 7.</li>
 </ul>
 
 <h2>3. Traitement par intelligence artificielle</h2>
-<p>L'extraction des données de reçus utilise des modèles d'IA (Google Gemini, et/ou Anthropic
-Claude). Les images et textes de reçus sont transmis à ces services uniquement pour
-l'extraction, conformément à leurs conditions ; ils ne sont pas utilisés pour entraîner des
-modèles. Les durées de garantie estimées par l'IA sont clairement signalées dans l'app.</p>
+<p>Pour lire vos reçus et trier vos courriels, Guardia fait appel à deux services d'IA, qui
+agissent pour notre compte :</p>
+<ul>
+<li><strong>Anthropic (Claude)</strong>, aux États-Unis : service principal. Claude Haiku trie
+les courriels (achat d'un bien physique ou non) ; Claude Sonnet relève les détails d'achat
+des photos, des PDF et des courriels retenus.</li>
+<li><strong>Google (Gemini)</strong>, aux États-Unis : seulement quand Claude ne répond pas.</li>
+</ul>
+<p><strong>Ce qui est envoyé</strong> : l'image ou le PDF d'un reçu ; pour un courriel retenu,
+l'expéditeur, l'objet, la date, le texte et la facture PDF jointe. <strong>Pourquoi</strong> :
+relever le commerçant, la date, les montants et les articles, pour calculer vos délais de
+retour et vos garanties. Guardia ne leur transmet pas votre compte (nom, adresse courriel de
+connexion) ; le texte d'un courriel ou d'un reçu peut toutefois contenir votre nom ou votre
+adresse de livraison. Ces services n'utilisent pas ces données pour entraîner leurs modèles.</p>
+<p><strong>Votre consentement</strong> est demandé dans l'app avant le premier envoi. Si vous
+refusez, vous pouvez toujours ajouter vos reçus à la main et vos courriels ne sont pas lus.
+Vous pouvez retirer ce consentement à tout moment : <em>Réglages → Lecture par IA</em>.
+Les dates et les échéances sont calculées par l'app, pas par l'IA ; les durées de garantie
+estimées par l'IA sont signalées comme telles.</p>
 
-<h2>4. Où sont stockées vos données</h2>
+<h2>4. Données Google (Gmail) : utilisation limitée</h2>
+<p>L'utilisation et le transfert à toute autre application des informations reçues des API
+Google par Guardia respectent la
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Politique sur les
+données utilisateur des services d'API Google</a>, y compris les exigences d'utilisation
+limitée (<em>Limited Use</em>). Concrètement :</p>
+<ul>
+<li>Guardia demande seulement l'accès en lecture (<code>gmail.readonly</code>) et ne peut ni
+envoyer, ni modifier, ni supprimer vos courriels.</li>
+<li>Les données Gmail servent uniquement à la fonction que vous voyez dans l'app : repérer vos
+achats de biens physiques pour suivre leurs retours et leurs garanties.</li>
+<li>Elles ne sont transférées qu'aux sous-traitants nécessaires à cette fonction (hébergement
+Supabase, lecture par Anthropic et, en secours, Google), pour se conformer à la loi, ou dans
+le cadre d'une fusion ou d'une acquisition, avec votre information préalable.</li>
+<li>Elles ne sont jamais utilisées ni transférées pour de la publicité, jamais vendues, et
+jamais utilisées pour entraîner des modèles d'IA généralistes.</li>
+<li>Personne chez Guardia ne lit vos courriels, sauf avec votre accord explicite pour un
+message précis, pour des raisons de sécurité (enquête sur un abus) ou pour se conformer à la loi.</li>
+</ul>
+<p>Vous pouvez couper l'accès à tout moment : dans Guardia (<em>Réglages → Comptes
+connectés</em>) ou dans votre compte Google (<em>Sécurité → Applications tierces</em>).
+Les mêmes règles s'appliquent aux courriels Outlook (Microsoft).</p>
+
+<h2>5. Où sont stockées vos données</h2>
 <p>Vos données sont hébergées chez Supabase (infrastructure AWS, région États-Unis Ouest),
 chiffrées au repos et en transit. Les images et PDF de reçus sont dans un espace de stockage
 privé accessible uniquement par votre compte.</p>
@@ -58,14 +101,14 @@ contractuelles et techniques mises en place (chiffrement au repos et en transit,
 par compte) et du régime juridique applicable dans le pays de destination. En utilisant
 Guardia, vous êtes informé de cette communication hors Québec.</p>
 
-<h2>5. Partage</h2>
+<h2>6. Partage</h2>
 <p>Nous ne vendons ni ne louons vos données. Elles ne sont partagées qu'avec les
 sous-traitants techniques nécessaires au fonctionnement : Supabase (hébergement),
-Google Gemini / Anthropic (extraction IA), RevenueCat (abonnements), Google / Microsoft
+Anthropic et Google (lecture par IA, section 3), RevenueCat (abonnements), Google / Microsoft
 (si vous connectez votre boîte mail) et, seulement si vous l'acceptez, Meta (mesure
-publicitaire, section 6).</p>
+publicitaire, section 7).</p>
 
-<h2>6. Mesure publicitaire (Meta)</h2>
+<h2>7. Mesure publicitaire (Meta)</h2>
 <p>Depuis la version 1.2.0, Guardia peut indiquer à Meta Platforms (Facebook, Instagram)
 quelles publicités vous ont fait découvrir l'application, afin de savoir lesquelles
 fonctionnent. <strong>Cette fonction est désactivée par défaut</strong> : elle ne s'active que
@@ -88,34 +131,34 @@ Suivi</em>. L'envoi s'arrête immédiatement.</p>
 <p>Meta traite ces données selon sa propre politique
 (<a href="https://www.facebook.com/privacy/policy">facebook.com/privacy/policy</a>), notamment
 aux États-Unis et en Irlande : elles sont donc communiquées à l'extérieur du Québec, aux
-conditions décrites à la section 4. Cette fonction permet un profilage publicitaire au sens de
+conditions décrites à la section 5. Cette fonction permet un profilage publicitaire au sens de
 la <em>Loi 25</em>, d'où son activation sur demande seulement.</p>
 
-<h2>7. Vos droits et suppression</h2>
+<h2>8. Vos droits et suppression</h2>
 <p>Vous pouvez supprimer définitivement votre compte et toutes vos données directement
 dans l'app : <em>Réglages → Supprimer mon compte</em>. La suppression est immédiate et
 irréversible (compte, reçus, images, données d'import). Vous pouvez aussi révoquer l'accès
 Gmail/Outlook à tout moment depuis les paramètres de sécurité Google/Microsoft. Pour toute
 demande (accès, rectification, portabilité) : <a href="mailto:contact@reseau-emergence.ca">contact@reseau-emergence.ca</a>.</p>
 
-<h2>8. Conservation</h2>
+<h2>9. Conservation</h2>
 <p>Les données sont conservées tant que votre compte existe. Après suppression du compte,
 toutes les données sont effacées de nos systèmes actifs immédiatement.</p>
 
-<h2>9. Responsable de la protection des renseignements personnels</h2>
+<h2>10. Responsable de la protection des renseignements personnels</h2>
 <p>Conformément à la <em>Loi 25</em> (Québec), la personne ayant la plus haute autorité au sein
 de Réseau É-Mergence Inc. agit à titre de <strong>responsable de la protection des
 renseignements personnels</strong>. Pour toute question, plainte ou demande relative à vos
 renseignements personnels, vous pouvez la joindre à :
 <a href="mailto:contact@reseau-emergence.ca">contact@reseau-emergence.ca</a>.</p>
 
-<h2>10. Incident de confidentialité</h2>
+<h2>11. Incident de confidentialité</h2>
 <p>En cas d'incident de confidentialité présentant un risque de préjudice sérieux, nous vous en
 informerons dans les meilleurs délais, et nous aviserons la Commission d'accès à l'information
 du Québec, conformément à nos obligations légales. Nous tenons un registre des incidents de
 confidentialité.</p>
 
-<h2>11. Modifications</h2>
+<h2>12. Modifications</h2>
 <p>Toute modification de cette politique sera publiée sur cette page avec une nouvelle date
 de mise à jour.</p>
 </body></html>

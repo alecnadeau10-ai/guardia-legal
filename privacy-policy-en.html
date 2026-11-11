@@ -11,7 +11,7 @@
     a { color: #b79cff; }
   }</style></head><body>
 <h1>Privacy Policy — Guardia</h1>
-<p class="updated">Last updated: 2026-10-05 · <a href="privacy-policy.html">Version française</a></p>
+<p class="updated">Last updated: 2026-11-11 · <a href="privacy-policy.html">Version française</a></p>
 
 <h2>1. Who we are</h2>
 <p>Guardia is a mobile app that helps you get back the money you're owed: it tracks return
@@ -23,10 +23,15 @@ Contact: <a href="mailto:contact@reseau-emergence.ca">contact@reseau-emergence.c
 <li><strong>Account</strong>: e-mail address (or Google / Apple identifier if you use social sign-in).</li>
 <li><strong>Receipts</strong>: photos of receipts you scan, imported PDF invoices, and the
 extracted data (merchant, date, amount, items, warranties).</li>
-<li><strong>E-mails (optional, with your explicit authorization)</strong>: if you connect Gmail
-or Outlook, we read receipt-like messages in read-only mode to extract purchase details.
-<strong>E-mails themselves are never stored</strong> — only the extracted receipt data and,
-where present, the attached PDF invoice are kept.</li>
+<li><strong>Emails (optional, with your explicit authorization)</strong>: if you connect Gmail
+or Outlook, Guardia reads, in read-only mode, the emails that contain a word like "order",
+"receipt" or "invoice" (promotions, social and forums excluded), over the last 24 months and
+then as new emails arrive, to find your purchases of physical goods.
+<strong>The text of your emails is never kept.</strong> We only keep: the purchase details
+picked out (merchant, order number, date, amounts, items), the email's ID, the sender's
+address (to avoid duplicates and apply your "Not a purchase" exclusions), a decision log with
+no content (category, confidence level, short reason) and, where present, the attached PDF
+invoice.</li>
 <li><strong>Credit cards (optional)</strong>: if you save a card to track the warranty
 extensions it provides, we keep only the <strong>card type</strong> (e.g. "Visa Infinite"),
 the <strong>last 4 digits</strong> and an optional nickname. <strong>We never collect the full
@@ -35,15 +40,52 @@ transmitted or stored. This data is used solely to tell you the extended warrant
 applies to your purchases.</li>
 <li><strong>Subscription</strong>: subscription status managed by RevenueCat, the App Store and
 Google Play (we never see your payment details).</li>
-<li><strong>Ad measurement (optional, only with your consent)</strong>: see section 6.</li>
+<li><strong>Ad measurement (optional, only with your consent)</strong>: see section 7.</li>
 </ul>
 
 <h2>3. AI processing</h2>
-<p>Receipt data extraction uses AI models (Google Gemini and/or Anthropic Claude). Receipt
-images and text are sent to these services solely for extraction, under their terms; they are
-not used to train models. AI-estimated warranty durations are clearly flagged in the app.</p>
+<p>To read your receipts and sort your emails, Guardia uses two AI services, acting on our
+behalf:</p>
+<ul>
+<li><strong>Anthropic (Claude)</strong>, in the United States: main service. Claude Haiku sorts
+emails (purchase of a physical good or not); Claude Sonnet picks out purchase details from
+photos, PDFs and the emails kept.</li>
+<li><strong>Google (Gemini)</strong>, in the United States: only when Claude doesn't respond.</li>
+</ul>
+<p><strong>What is sent</strong>: the image or PDF of a receipt; for an email kept, the sender,
+subject, date, text and attached PDF invoice. <strong>Why</strong>: to pick out the merchant,
+date, amounts and items, so we can work out your return windows and warranties. Guardia does not send
+them your account (name, sign-in email address); the text of an email or receipt may however
+contain your name or shipping address. These services do not use this data to train their
+models.</p>
+<p><strong>Your consent</strong> is asked in the app before the first time anything is sent. If
+you decline, you can still add your receipts by hand and your emails are not read. You can
+withdraw consent at any time: <em>Settings → AI reading</em>. Dates and deadlines are computed
+by the app, not by the AI; warranty durations estimated by the AI are flagged as such.</p>
 
-<h2>4. Where your data lives</h2>
+<h2>4. Google user data (Gmail): Limited Use</h2>
+<p>Guardia's use and transfer to any other app of information received from Google APIs will
+adhere to the
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services
+User Data Policy</a>, including the Limited Use requirements. In practice:</p>
+<ul>
+<li>Guardia only requests read-only access (<code>gmail.readonly</code>) and cannot send,
+change or delete your emails.</li>
+<li>Gmail data is used only for the feature you see in the app: finding your purchases of
+physical goods to track their returns and warranties.</li>
+<li>It is only transferred to the processors needed for that feature (Supabase hosting,
+reading by Anthropic and, as a backup, Google), to comply with the law, or as part of a merger
+or acquisition, with prior notice to you.</li>
+<li>It is never used or transferred for advertising, never sold, and never used to train
+general-purpose AI models.</li>
+<li>No one at Guardia reads your emails, except with your explicit consent for a specific
+message, for security purposes (investigating abuse), or to comply with the law.</li>
+</ul>
+<p>You can cut access at any time: in Guardia (<em>Settings → Connected accounts</em>) or in
+your Google account (<em>Security → Third-party apps</em>). The same rules apply to Outlook
+(Microsoft) emails.</p>
+
+<h2>5. Where your data lives</h2>
 <p>Your data is hosted on Supabase (AWS infrastructure, US West region), encrypted at rest
 and in transit. Receipt images and PDFs live in private storage accessible only by your account.</p>
 <p><strong>Disclosure outside Québec.</strong> Your personal information is therefore stored and
@@ -53,13 +95,13 @@ purposes for which it is used, the contractual and technical safeguards in place
 rest and in transit, per-account isolation) and the legal framework applicable in the destination
 country. By using Guardia, you are informed of this disclosure outside Québec.</p>
 
-<h2>5. Sharing</h2>
+<h2>6. Sharing</h2>
 <p>We do not sell or rent your data. It is shared only with the technical processors required
-to operate the service: Supabase (hosting), Google Gemini / Anthropic (AI extraction),
+to operate the service: Supabase (hosting), Anthropic and Google (AI reading, section 3),
 RevenueCat (subscriptions), Google / Microsoft (if you connect your mailbox) and, only if
-you agree, Meta (ad measurement, section 6).</p>
+you agree, Meta (ad measurement, section 7).</p>
 
-<h2>6. Ad measurement (Meta)</h2>
+<h2>7. Ad measurement (Meta)</h2>
 <p>Since version 1.2.0, Guardia can tell Meta Platforms (Facebook, Instagram) which ads led
 you to the app, so we know which ones work. <strong>This feature is off by default</strong>:
 it is only turned on if you agree, once, after you save your first receipt (on iPhone through
@@ -79,32 +121,32 @@ immediately.</p>
 <p>Meta processes this data under its own policy
 (<a href="https://www.facebook.com/privacy/policy">facebook.com/privacy/policy</a>), including in
 the United States and Ireland, so it is communicated outside Québec under the conditions
-described in section 4. This feature allows advertising profiling within the meaning of
+described in section 5. This feature allows advertising profiling within the meaning of
 Québec's <em>Law 25</em>, which is why it is only turned on at your request.</p>
 
-<h2>7. Your rights and deletion</h2>
+<h2>8. Your rights and deletion</h2>
 <p>You can permanently delete your account and all your data directly in the app:
 <em>Settings → Delete my account</em>. Deletion is immediate and irreversible (account,
 receipts, images, import data). You can also revoke Gmail/Outlook access at any time from
 your Google/Microsoft security settings. For any request (access, rectification,
 portability): <a href="mailto:contact@reseau-emergence.ca">contact@reseau-emergence.ca</a>.</p>
 
-<h2>8. Retention</h2>
+<h2>9. Retention</h2>
 <p>Data is kept for as long as your account exists. After account deletion, all data is
 removed from our active systems immediately.</p>
 
-<h2>9. Privacy officer</h2>
+<h2>10. Privacy officer</h2>
 <p>In accordance with Québec's <em>Law 25</em>, the person with the highest authority within
 Réseau É-Mergence Inc. acts as the <strong>person in charge of the protection of personal
 information</strong>. For any question, complaint or request regarding your personal
 information, you may contact them at:
 <a href="mailto:contact@reseau-emergence.ca">contact@reseau-emergence.ca</a>.</p>
 
-<h2>10. Confidentiality incidents</h2>
+<h2>11. Confidentiality incidents</h2>
 <p>In the event of a confidentiality incident presenting a risk of serious injury, we will
 notify you promptly and will inform the Commission d'accès à l'information du Québec, in
 accordance with our legal obligations. We maintain a register of confidentiality incidents.</p>
 
-<h2>11. Changes</h2>
+<h2>12. Changes</h2>
 <p>Any change to this policy will be published on this page with a new update date.</p>
 </body></html>
